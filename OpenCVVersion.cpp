@@ -1,4 +1,4 @@
-%%cu
+// %%cu
 // C++
 #include <iostream>
 #include <vector>
