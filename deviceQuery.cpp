@@ -20,7 +20,10 @@
 
 #include <cuda_runtime.h>
 // #include <helper_cuda.h>
-
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/stitching.hpp>
+#include <opencv2/core/utility.hpp>
 
 
 int *pArgc = NULL;
