@@ -25,77 +25,49 @@
 #include <opencv2/stitching.hpp>
 #include <opencv2/core/utility.hpp>
 
-
-int *pArgc = NULL;
-char **pArgv = NULL;
-
-#if CUDART_VERSION < 5000
-
 // CUDA-C includes
 #include <cuda.h>
 
 // This function wraps the CUDA Driver API into a template function
 template <class T>
-inline void getCudaAttribute(T *attribute, CUdevice_attribute device_attribute, int device)
-{
-    CUresult error =    cuDeviceGetAttribute(attribute, device_attribute, device);
-
-    if (CUDA_SUCCESS != error)
-    {
-        fprintf(stderr, "cuSafeCallNoSync() Driver API error = %04d from file <%s>, line %i.\n",
-                error, __FILE__, __LINE__);
-
-        exit(EXIT_FAILURE);
-    }
-}
-
-#endif /* CUDART_VERSION < 5000 */
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    pArgc = &argc;
-    pArgv = argv;
-
-    printf("%s Starting...\n\n", argv[0]);
-    printf(" CUDA Device Query (Runtime API) version (CUDART static linking)\n\n");
-
+    std::cout<<"Starting..."<<, argv[0]<<std::endl<<std::endl;
+    std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
-
-    if (error_id != cudaSuccess)
-    {
-        printf("cudaGetDeviceCount returned %d\n-> %s\n", (int)error_id, cudaGetErrorString(error_id));
-        printf("Result = FAIL\n");
+    if (error_id != cudaSuccess){
+        std::cout<<"cudaGetDeviceCount returned "<< (int)error_id<< cudaGetErrorString(error_id)<<std::endl;
+        std::cout<<"Result = FAIL"<<std::endl;
         exit(EXIT_FAILURE);
     }
-
     // This function call returns 0 if there are no CUDA capable devices.
     if (deviceCount == 0)
-    {
-        printf("There are no available device(s) that support CUDA\n");
-    }
+        std::cout<<"There are no available device(s) that support CUDA"<<std::endl;
     else
-    {
-        printf("Detected %d CUDA Capable device(s)\n", deviceCount);
-    }
-
+        std::cout<<"Detected %d CUDA Capable device(s)"<< deviceCount<<std::endl<<std::endl;
     int dev, driverVersion = 0, runtimeVersion = 0;
-
-    for (dev = 0; dev < deviceCount; ++dev)
-    {
+    for (dev = 0; dev < deviceCount; ++dev){
         cudaSetDevice(dev);
         cudaDeviceProp deviceProp;
         cudaGetDeviceProperties(&deviceProp, dev);
-
-        printf("\nDevice %d: \"%s\"\n", dev, deviceProp.name);
-
+        std::cout<<"Device: "<< dev<<deviceProp.name<<std::endl;
         // Console log
         cudaDriverGetVersion(&driverVersion);
         cudaRuntimeGetVersion(&runtimeVersion);
-        printf("  CUDA Driver Version / Runtime Version          %d.%d / %d.%d\n", driverVersion/1000, (driverVersion%100)/10, runtimeVersion/1000, (runtimeVersion%100)/10);
-        printf("  CUDA Capability Major/Minor version number:    %d.%d\n", deviceProp.major, deviceProp.minor);
+        std::cout<<"CUDA Driver Version / Runtime Version          "<< driverVersion/1000
+                << (driverVersion%100)/10<<runtimeVersion/1000<<(runtimeVersion%100)/10<<std::endl;
+        std::cout<<"CUDA Capability Major/Minor version number:          "<< driverVersion/1000
+                << deviceProp.major<<deviceProp.minor<<std::endl;
     }
+    // Check OpenCV Version
+    std::cout<<"Hola Mundo"<<std::endl; 
+    std::cout << "OpenCV version : " << CV_VERSION << std::endl;
+    std::cout << "Major version : " << CV_MAJOR_VERSION << std::endl;
+    std::cout << "Minor version : " << CV_MINOR_VERSION << std::endl;
+    std::cout << "Subminor version : " << CV_SUBMINOR_VERSION << std::endl;
 }
