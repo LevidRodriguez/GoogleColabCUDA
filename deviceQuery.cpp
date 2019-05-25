@@ -36,7 +36,7 @@ template <class T>
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char **argv)
 {
-    std::cout<<"Starting..."<<, argv[0]<<std::endl<<std::endl;
+    std::cout<<"Starting..."<<argv[0]<<std::endl<<std::endl;
     std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
