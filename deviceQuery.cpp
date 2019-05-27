@@ -86,5 +86,6 @@ int main(int argc, char **argv)
     
     cv::cvtColor(image, imgGrayScale,cv::COLOR_BGR2GRAY);    
     cv::imwrite("srcImageGrayScale.png",imgGrayScale);
+    std::cout<<"Writed Image"<<std::endl;
     return 0;
 }
