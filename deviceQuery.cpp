@@ -79,7 +79,12 @@ int main(int argc, char **argv)
     }
     std::cout<<"Image open!"<<std::endl;
     cv::Mat imgGrayScale;
-    cv::cvtColor(imgGrayScale, image, cv::COLOR_BGR2GRAY);    
+    if (/* condition */)
+    {
+        /* code */
+    }
+    
+    cv::cvtColor(image, imgGrayScale,cv::COLOR_BGR2GRAY);    
     cv::imwrite("srcImageGrayScale.png",imgGrayScale);
     return 0;
 }
