@@ -74,7 +74,12 @@ int main(int argc, char **argv)
     std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
 
     image = cv::imread("images/HappyFish.jpg");
+    if (!image.data){
+        std::cout<<"Could not open or find the image"<<std::endl;
+    }
+    std::cout<<"Image open!"<<std::endl;
+    
     // cv::namedWindow("Display image", WINDOW_AUTOSIZE);
-    cv::imshow("Display image", image);
-    cv::waitKey();
+    // cv::imshow("Display image", image);
+    // cv::waitKey();
 }
