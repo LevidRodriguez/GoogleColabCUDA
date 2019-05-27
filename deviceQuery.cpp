@@ -41,8 +41,8 @@ int main(int argc, char **argv)
     std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
     Mat image;
-    
-    std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
+
+    // std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
 
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
     if (error_id != cudaSuccess){
