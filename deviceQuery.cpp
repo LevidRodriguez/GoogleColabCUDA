@@ -19,7 +19,6 @@
 #include <stdlib.h>
 
 #include <cuda_runtime.h>
-// #include <helper_cuda.h>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/stitching.hpp>
@@ -37,6 +36,7 @@ int main(int argc, char **argv)
     std::cout<<"Starting..."<<argv[0]<<std::endl<<std::endl;
     std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
+    std::vector<cv::Mat> imags;
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
     if (error_id != cudaSuccess){
         std::cout<<"cudaGetDeviceCount returned "<< (int)error_id<< cudaGetErrorString(error_id)<<std::endl;
