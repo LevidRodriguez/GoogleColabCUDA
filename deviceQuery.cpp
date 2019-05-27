@@ -31,12 +31,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
+
+using namespace cv;
+using namespace std;
+
 int main(int argc, char **argv)
 {
     std::cout<<"Starting..."<<argv[0]<<std::endl<<std::endl;
     std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
-    cv::Mat E = cv::Mat::eye(4,4, CV_64F);
+    Mat image;
+    
     std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
 
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
