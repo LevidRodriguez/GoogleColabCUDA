@@ -32,18 +32,11 @@
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
 
-using namespace cv;
-using namespace std;
-
 int main(int argc, char **argv)
 {
     std::cout<<"Starting..."<<argv[0]<<std::endl<<std::endl;
     std::cout<<" CUDA Device Query (Runtime API) version (CUDART static linking)"<<std::endl<<std::endl;
     int deviceCount = 0;
-    Mat image;
-    cv::Mat E = cv::Mat::eye(4,4,CV_64F);
-    std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
-
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
     if (error_id != cudaSuccess){
         std::cout<<"cudaGetDeviceCount returned "<< (int)error_id<< cudaGetErrorString(error_id)<<std::endl;
@@ -54,7 +47,7 @@ int main(int argc, char **argv)
     if (deviceCount == 0)
         std::cout<<"There are no available device(s) that support CUDA"<<std::endl;
     else
-        std::cout<<"Detected %d CUDA Capable device(s)"<< deviceCount<<std::endl<<std::endl;
+        std::cout<<"Detected "<< deviceCount<<"CUDA Capable device(s)"<<std::endl<<std::endl;
     int dev, driverVersion = 0, runtimeVersion = 0;
     for (dev = 0; dev < deviceCount; ++dev){
         cudaSetDevice(dev);
@@ -75,4 +68,13 @@ int main(int argc, char **argv)
     std::cout << "Major version : " << CV_MAJOR_VERSION << std::endl;
     std::cout << "Minor version : " << CV_MINOR_VERSION << std::endl;
     std::cout << "Subminor version : " << CV_SUBMINOR_VERSION << std::endl;
+
+    cv::Mat image;
+    cv::Mat E = cv::Mat::eye(4,4,CV_64F);
+    std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
+
+    image = cv::imread("images/HappyFish.jpg");
+    // cv::namedWindow("Display image", WINDOW_AUTOSIZE);
+    cv::imshow("Display image", image);
+    cv::waitKey();
 }
