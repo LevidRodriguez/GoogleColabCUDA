@@ -213,8 +213,12 @@ else
       BUILD_TYPE := release
 endif
 
+OPENCV = `pkg-config opencv --cflags --libs`
 ALL_CCFLAGS :=
 ALL_CCFLAGS += $(NVCCFLAGS)
+
+ALL_CCFLAGS += $(OPENCV)
+
 ALL_CCFLAGS += $(EXTRA_NVCCFLAGS)
 ALL_CCFLAGS += $(addprefix -Xcompiler ,$(CCFLAGS))
 ALL_CCFLAGS += $(addprefix -Xcompiler ,$(EXTRA_CCFLAGS))
