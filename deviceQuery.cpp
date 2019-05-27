@@ -41,6 +41,9 @@ cv::Stitcher::Mode mode = cv::Stitcher::PANORAMA;
 std::vector<cv::Mat> imgs;
 std::string result_name = "result.jpg";
 
+void printUsage(char** argv);
+int parseCmdArgs(int argc, char** argv);
+
 
 int main(int argc, char **argv)
 {
