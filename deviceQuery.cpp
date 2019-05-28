@@ -131,6 +131,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
+/*
 void printUsage(char** argv){
     cout <<
          "Images stitcher.\n\n" << "Usage :\n" << argv[0] <<" [Flags] img1 img2 [...imgN]\n\n"
@@ -219,3 +220,4 @@ int parseCmdArgs(int argc, char** argv){
     }
     return EXIT_SUCCESS;
 }
+*/
