@@ -23,6 +23,7 @@
 // #include <opencv2/highgui.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/stitching.hpp>
+// #include <opencv2/core/utility.hpp>
 #include <opencv2/core/utility.hpp>
 
 // CUDA-C includes
@@ -97,20 +98,37 @@ int main(int argc, char **argv)
     cv::imwrite("grayScale.png",imgGrayScale);
     std::cout<<"Writed Image"<<std::endl;
 
-    int retval = parseCmdArgs(argc, argv);
-    if (retval) return EXIT_FAILURE;
-    Mat pano;
-    Ptr<Stitcher> stitcher = Stitcher::create(mode, try_use_gpu);
-    Stitcher::Status status = stitcher->stitch(imgs, pano);
-    if (status != Stitcher::OK)
-    {
-        cout << "Can't stitch images, error code = " << int(status) << endl;
-        return EXIT_FAILURE;
-    }
-    imwrite(result_name, pano);
-    cout << "stitching completed successfully\n" << result_name << " saved!";
-    return EXIT_SUCCESS;
-    // return 0;
+    for (int i = 1; i < argc; ++i) 
+    { 
+            // Read the ith argument or image  
+            // and push into the image array 
+            Mat img = imread(argv[i]); 
+            if (img.empty()) 
+            { 
+                // Exit if image is not present 
+                cout << "Can't read image '" << argv[i] << "'\n"; 
+                return -1; 
+            } 
+            imgs.push_back(img); 
+    } 
+      
+    // Define object to store the stitched image 
+    Mat pano; 
+    // Create a Stitcher class object with mode panoroma 
+    Ptr<Stitcher> stitcher = Stitcher::create(mode, false); 
+    // Command to stitch all the images present in the image array 
+    Stitcher::Status status = stitcher->stitch(imgs, pano); 
+    if (status != Stitcher::OK) 
+    { 
+        // Check if images could not be stiched 
+        // status is OK if images are stiched successfully 
+        cout << "Can't stitch images\n"; 
+        return -1; 
+    } 
+    // Store a new image stiched from the given  
+    //set of images as "result.jpg" 
+    imwrite("result.jpg", pano); 
+    return 0;
 }
 
 void printUsage(char** argv){
