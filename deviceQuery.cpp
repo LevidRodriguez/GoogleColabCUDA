@@ -119,7 +119,9 @@ int main(int argc, char **argv)
     // Command to stitch all the images present in the image array 
     std::cout<<"Command to stitch all the images present in the image array "<<std::endl;
     cv::Stitcher::Status status = stitcher->stitch(imgs, pano);
+    std::cout<<"pano done..."<<std::endl;
     cv::Stitcher::Status status2 = stitcher2->stitch(imgs, photoscans); 
+    std::cout<<"scans done..."<<std::endl;
     if (status != cv::Stitcher::OK) { 
         cout << "Can't stitch images\n"; 
         return -1; 
