@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     cv::Mat pano; 
     cv::Mat photoscans;
     // Create a Stitcher class object with mode panoroma 
-    std::cout<<"Create a Stitcher class object with mode panoroma "<,std::endl;
+    std::cout<<"Create a Stitcher class object with mode panoroma "<<std::endl;
     cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode, false); 
     cv::Ptr<cv::Stitcher> stitcher2 = cv::Stitcher::create(modeSCANS, false);
     // Command to stitch all the images present in the image array 
