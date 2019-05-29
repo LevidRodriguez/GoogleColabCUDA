@@ -72,7 +72,7 @@ int main(int argc, char **argv)
         std::cout<<"CUDA Driver Version / Runtime Version          "<< driverVersion/1000
                 << (driverVersion%100)/10<<runtimeVersion/1000<<(runtimeVersion%100)/10<<std::endl;
         std::cout<<"CUDA Capability Major / Minor version number:          "<< driverVersion/1000
-                << deviceProp.major<<deviceProp.minor<<std::endl;
+                << deviceProp.major<<deviceProp.minor<<std::endl<<std::endl;
     }
     // Check OpenCV Version 
     // std::cout << "OpenCV version : " << CV_VERSION << std::endl;
@@ -95,8 +95,10 @@ int main(int argc, char **argv)
     // std::cout<<"Writed Image"<<std::endl;
     
     // Stitching de Imagenes
+    std::cout<<"Stitching de Imagenes"<<std::endl<<std::endl;
     for (int i = 1; i < argc; ++i) { 
-        cv::Mat img = cv::imread(argv[i]); 
+        cv::Mat img = cv::imread(argv[i]);
+        std::cout<<argv[i]<<" Processing... "<<std::endl; 
         if (img.empty()) { 
             // Exit if image is not present 
             cout << "Can't read image '" << argv[i] << "'\n"; 
