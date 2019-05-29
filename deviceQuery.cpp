@@ -38,8 +38,9 @@ using namespace std;
 using namespace cv;
 
 cv::Stitcher::Mode mode = cv::Stitcher::PANORAMA;
+cv::Stitcher::Mode modeSCANS = cv::Stitcher::SCANS;
 std::vector<cv::Mat> imgs;
-std::string result_name = "resultDJI.jpg";
+// std::string result_name = "resultDJI.jpg";
 
 int main(int argc, char **argv)
 {
@@ -74,24 +75,24 @@ int main(int argc, char **argv)
                 << deviceProp.major<<deviceProp.minor<<std::endl;
     }
     // Check OpenCV Version 
-    std::cout << "OpenCV version : " << CV_VERSION << std::endl;
-    std::cout << "Major version : " << CV_MAJOR_VERSION << std::endl;
-    std::cout << "Minor version : " << CV_MINOR_VERSION << std::endl;
-    std::cout << "Subminor version : " << CV_SUBMINOR_VERSION << std::endl;
+    // std::cout << "OpenCV version : " << CV_VERSION << std::endl;
+    // std::cout << "Major version : " << CV_MAJOR_VERSION << std::endl;
+    // std::cout << "Minor version : " << CV_MINOR_VERSION << std::endl;
+    // std::cout << "Subminor version : " << CV_SUBMINOR_VERSION << std::endl;
 
-    cv::Mat image;
-    cv::Mat E = cv::Mat::eye(4,4,CV_64F);
-    std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
-    image = cv::imread("images/HappyFish.jpg");
-    if (!image.data){
-        std::cout<<"Could not open or find the image"<<std::endl;
-        return -1;
-    }
-    std::cout<<"Image open!"<<std::endl;
-    cv::Mat imgGrayScale;
-    cv::cvtColor(image, imgGrayScale,cv::COLOR_BGR2GRAY);    
-    cv::imwrite("grayScale.png",imgGrayScale);
-    std::cout<<"Writed Image"<<std::endl;
+    // cv::Mat image;
+    // cv::Mat E = cv::Mat::eye(4,4,CV_64F);
+    // std:: cout<<"E = "<< std::endl<<" "<<E<<std::endl<<std::endl;
+    // image = cv::imread("images/HappyFish.jpg");
+    // if (!image.data){
+    //     std::cout<<"Could not open or find the image"<<std::endl;
+    //     return -1;
+    // }
+    // std::cout<<"Image open!"<<std::endl;
+    // cv::Mat imgGrayScale;
+    // cv::cvtColor(image, imgGrayScale,cv::COLOR_BGR2GRAY);    
+    // cv::imwrite("grayScale.png",imgGrayScale);
+    // std::cout<<"Writed Image"<<std::endl;
     
     // Stitching de Imagenes
     for (int i = 1; i < argc; ++i) { 
@@ -107,17 +108,21 @@ int main(int argc, char **argv)
     } 
     // Define object to store the stitched image 
     cv::Mat pano; 
+    cv::Mat scans;
     // Create a Stitcher class object with mode panoroma 
     cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode, false); 
+    cv::Ptr<cv::Stitcher> stitcher2 = cv::Stitcher::create(modeSCANS, false);
     // Command to stitch all the images present in the image array 
-    cv::Stitcher::Status status = stitcher->stitch(imgs, pano); 
+    cv::Stitcher::Status status = stitcher->stitch(imgs, pano);
+    cv::Stitcher::Status status2 = stitcher2->stitch(imgs, scans); 
     if (status != cv::Stitcher::OK) { 
         cout << "Can't stitch images\n"; 
         return -1; 
     } 
     // Store a new image stiched from the given  
     //set of images as "result.jpg" 
-    cv::imwrite("result.jpg", pano); 
+    cv::imwrite("resultPano.jpg", pano);
+    cv::imwrite("resultScans.jpg", scans); 
     std::cout<<"Results is written"<<std::endl;
     return 0;
 }
