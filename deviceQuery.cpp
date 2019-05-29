@@ -109,12 +109,15 @@ int main(int argc, char **argv)
         imgs.push_back(img); 
     } 
     // Define object to store the stitched image 
+    std::cout<<"Define object to store the stitched image "<<std::endl;
     cv::Mat pano; 
     cv::Mat photoscans;
     // Create a Stitcher class object with mode panoroma 
+    std::cout<<"Create a Stitcher class object with mode panoroma "<,std::endl;
     cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode, false); 
     cv::Ptr<cv::Stitcher> stitcher2 = cv::Stitcher::create(modeSCANS, false);
     // Command to stitch all the images present in the image array 
+    std::cout<<"Command to stitch all the images present in the image array "<<std::endl;
     cv::Stitcher::Status status = stitcher->stitch(imgs, pano);
     cv::Stitcher::Status status2 = stitcher2->stitch(imgs, photoscans); 
     if (status != cv::Stitcher::OK) { 
@@ -122,6 +125,7 @@ int main(int argc, char **argv)
         return -1; 
     } 
     // Store a new image stiched from the given  
+    std::cout<<"Store a new image stiched from the given  "<<std::endl;
     //set of images as "result.jpg" 
     cv::imwrite("resultPano.jpg", pano);
     cv::imwrite("resultScans.jpg", photoscans); 
