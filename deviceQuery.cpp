@@ -120,8 +120,6 @@ int main(int argc, char **argv)
     std::cout<<"Command to stitch all the images present in the image array "<<std::endl;
     cv::Stitcher::Status status = stitcher->stitch(imgs, pano);
     std::cout<<"pano done..."<<std::endl;
-    cv::Stitcher::Status status2 = stitcher2->stitch(imgs, photoscans); 
-    std::cout<<"scans done..."<<std::endl;
     if (status != cv::Stitcher::OK) { 
         cout << "Can't stitch images\n"; 
         return -1; 
@@ -130,7 +128,11 @@ int main(int argc, char **argv)
     std::cout<<"Store a new image stiched from the given  "<<std::endl;
     //set of images as "result.jpg" 
     cv::imwrite("resultPano.jpg", pano);
+    
+    cv::Stitcher::Status status2 = stitcher2->stitch(imgs, photoscans); 
+    std::cout<<"scans done..."<<std::endl;
     cv::imwrite("resultScans.jpg", photoscans); 
+    
     std::cout<<"Results is written"<<std::endl;
     return 0;
 }
